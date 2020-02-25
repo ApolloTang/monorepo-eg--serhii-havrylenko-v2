@@ -1,7 +1,10 @@
 {
   "name": "root",
+  "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "workspaces": [
+    "apps/*",
     "packages/*"
   ],
   "devDependencies": {
@@ -19,7 +22,14 @@
     "typescript": "^3.8.2"
   },
   "scripts": {
-    "prebuild": "tsc",
-    "build": "lerna exec --parallel 'BABEL_ENV=build babel --root-mode upward src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --no-comments'"
+    "mono:bootstrap": "lerna bootstrap --use-workspaces",
+    "mono:clean": "rm -fr node_modules && lerna clean",
+    "xxxprebuild": "tsc",
+    "build:pkgs":"lerna --scope=@myscope/pkg--* exec --parallel -- BABEL_ENV=build babel --root-mode upward src -d dist -s --delete-dir-on-start --no-comments",
+    "build:serhii:doesNotwork":"lerna --scope=@myscope/pkg--* exec --parallel 'BABEL_ENV=build babel --root-mode upward src --out-dir dist --source-maps --extensions .ts,.tsx.js,.jsx --delete-dir-on-start --no-comments'",
+    "build:cleanAll": "yarn workspaces run build:clean && lerna --scope=@myscope/app--* exec --parallel -- rm -fr lib",
+    "dev:reactapp": "yarn workspace @myscope/app--my-react-app run dev",
+    "build:reactapp": "yarn workspace @myscope/app--my-react-app run build",
+    "serve:reactapp": "yarn workspace @myscope/app--my-react-app run start"
   }
 }

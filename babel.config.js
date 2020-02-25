@@ -1,10 +1,12 @@
 module.exports = (api) => {
   api.cache(true);
 
-  return {
+  console.log('xxx root babel.config.js', process.env.BABEL_ENV)
+
+  const out =  {
     presets: [
       [
-        '@babel/env',
+        '@babel/preset-env',
         {
           targets: {
             browsers: 'Last 2 Chrome versions, Firefox ESR',
@@ -25,7 +27,8 @@ module.exports = (api) => {
         ignore: [
           '**/*.test.tsx',
           '**/*.test.ts',
-          '**/*.story.tsx',
+          '**/*.stories.tsx',
+          '**/*.stories.js',
           '__snapshots__',
           '__tests__',
           '__stories__',
@@ -33,5 +36,8 @@ module.exports = (api) => {
       },
     },
     ignore: ['node_modules'],
+    include: [/.*\.(t|j)x?s/],  // this will not work in --extensions flag is set in cli
   };
+
+  return out
 };
