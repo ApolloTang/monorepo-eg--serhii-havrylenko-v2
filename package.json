@@ -24,7 +24,7 @@
   "scripts": {
     "mono:bootstrap": "lerna bootstrap --use-workspaces",
     "mono:clean": "rm -fr node_modules && lerna clean",
-    "xxxprebuild": "tsc",
+    "prebuild:pkgsXXX": "tsc",
     "build:pkgs":"lerna --scope=@myscope/pkg--* exec --parallel -- BABEL_ENV=build babel --root-mode upward src -d dist -s --delete-dir-on-start --no-comments",
     "build:serhii:doesNotwork":"lerna --scope=@myscope/pkg--* exec --parallel 'BABEL_ENV=build babel --root-mode upward src --out-dir dist --source-maps --extensions .ts,.tsx.js,.jsx --delete-dir-on-start --no-comments'",
     "build:cleanAll": "yarn workspaces run build:clean && lerna --scope=@myscope/app--* exec --parallel -- rm -fr lib",
